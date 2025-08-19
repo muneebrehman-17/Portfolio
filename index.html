@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muneeb Rehman – Portfolio</title>
+    <title>Muneeb Ur Rehman – Portfolio</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23111827'/><text x='50' y='50' font-size='50' fill='white' text-anchor='middle' dy='.1em' font-family='Inter, sans-serif' font-weight='bold'>MR</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -338,7 +338,7 @@
             // --- FILTERING & SORTING LOGIC ---
             let query = "";
             let activeTag = "All";
-            let sort = "Newest";
+            let sort = "Oldest";
 
             const searchQuery = document.getElementById('search-query');
             const sortOrder = document.getElementById('sort-order');
@@ -353,7 +353,7 @@
                     return matchesQuery && matchesTag;
                 });
 
-                filtered.sort((a, b) => (sort === "Newest" ? b.year - a.year : a.year - b.year));
+                filtered.sort((a, b) => (sort === "Oldest" ? b.year - a.year : a.year - b.year));
 
                 if (filtered.length === 0) {
                     projectsContainer.innerHTML = '';
@@ -449,3 +449,4 @@
     </script>
 </body>
 </html>
+
