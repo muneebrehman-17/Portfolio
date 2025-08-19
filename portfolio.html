@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muneeb Rehman – Portfolio</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23111827'/><text x='50' y='50' font-size='50' fill='white' text-anchor='middle' dy='.1em' font-family='Inter, sans-serif' font-weight='bold'>MR</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body, html {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Full-page scroll snap */
+        html {
+            scroll-snap-type: y mandatory;
+        }
+        section {
+            scroll-snap-align: start;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .placeholder-image {
+            position: relative;
+            overflow: hidden;
+            background-color: #f3f4f6;
+        }
+        .placeholder-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            transform: skewX(-25deg) translateX(-150%);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            animation: shimmer 3s infinite ease-in-out;
+        }
+        @keyframes shimmer {
+            0% { transform: skewX(-25deg) translateX(-150%); }
+            50% { transform: skewX(-25deg) translateX(250%); }
+            100% { transform: skewX(-25deg) translateX(250%); }
+        }
+        /* Animated scroll down arrow */
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-20px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-white to-slate-50 text-slate-900">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 backdrop-blur bg-white/70 border-b border-slate-200">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+            <a href="#home" id="header-name" class="font-bold tracking-tight text-lg"></a>
+            <nav class="hidden md:flex items-center gap-6 text-sm">
+                <a href="#skills" class="hover:text-slate-600">Skills</a>
+                <a href="#projects" class="hover:text-slate-600">Projects</a>
+                <a href="#contact" class="hover:text-slate-600">Contact</a>
+                <a href="#" id="header-resume-link" class="inline-flex items-center gap-2 rounded-2xl px-3 py-1.5 bg-slate-900 text-white shadow-sm hover:shadow transition">
+                    Download CV <i data-feather="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </nav>
+            <div class="md:hidden" aria-hidden>
+                <a href="#contact" class="rounded-xl px-3 py-1.5 bg-slate-900 text-white">Hire</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="relative">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-10 items-center">
+                    <div class="space-y-6" data-aos="fade-up">
+                        <p class="inline-flex items-center gap-2 text-sm text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1 w-fit">
+                            <i data-feather="check-circle" class="w-4 h-4"></i> <span id="hero-availability"></span>
+                        </p>
+                        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
+                            <span id="hero-role"></span>
+                            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-slate-700 to-slate-400">
+                                Crafting premium web experiences
+                            </span>
+                        </h1>
+                        <p id="hero-tagline" class="text-slate-600 text-lg max-w-2xl"></p>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="#projects" class="rounded-2xl px-5 py-2.5 bg-slate-900 text-white shadow hover:shadow-md transition">
+                                View Projects
+                            </a>
+                            <a href="#" id="hero-email-link" class="rounded-2xl px-5 py-2.5 bg-white border border-slate-200 hover:bg-slate-50 shadow-sm transition inline-flex items-center gap-2">
+                                <i data-feather="mail" class="w-4 h-4"></i> Contact Me
+                            </a>
+                            <a href="#" id="hero-github-link" target="_blank" rel="noreferrer" class="rounded-2xl px-4 py-2.5 bg-white border border-slate-200 hover:bg-slate-50 shadow-sm transition inline-flex items-center gap-2" aria-label="GitHub">
+                                <i data-feather="github" class="w-4 h-4"></i>
+                            </a>
+                            <a href="#" id="hero-linkedin-link" target="_blank" rel="noreferrer" class="rounded-2xl px-4 py-2.5 bg-white border border-slate-200 hover:bg-slate-50 shadow-sm transition inline-flex items-center gap-2" aria-label="LinkedIn">
+                                <i data-feather="linkedin" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                        <div id="stats-container" class="grid grid-cols-3 gap-4 pt-4">
+                            <!-- Stats will be injected here -->
+                        </div>
+                    </div>
+
+                    <div class="relative" data-aos="fade-up" data-aos-delay="200">
+                        <div class="aspect-[4/3] rounded-3xl bg-gradient-to-br from-slate-900 via-slate-700 to-slate-500 p-1 shadow-2xl">
+                            <div class="rounded-[22px] h-full w-full bg-[radial-gradient(1000px_400px_at_0%_0%,rgba(255,255,255,0.16),transparent)]">
+                                <div class="h-full w-full grid place-items-center text-white/90 p-8">
+                                    <div class="text-center space-y-3">
+                                        <div class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white/70">
+                                            <i data-feather="calendar" class="w-4 h-4"></i> <span id="hero-location"></span>
+                                        </div>
+                                        <p class="text-3xl md:text-4xl font-semibold">
+                                            I design, code & ship delightful products.
+                                        </p>
+                                        <p class="text-sm text-white/80 max-w-md mx-auto">
+                                            Pixel‑perfect design systems, accessible components, and performant code.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#skills" class="scroll-down">
+                <i data-feather="arrow-down" class="w-8 h-8 text-slate-400"></i>
+            </a>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+                <div class="mb-8" data-aos="fade-up">
+                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-center">Core Skills</h2>
+                    <p class="text-slate-600 mt-2 text-center">A balanced stack across design and development.</p>
+                </div>
+                <div id="skills-container" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" data-aos="fade-up" data-aos-delay="100">
+                    <!-- Skills will be injected here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+                <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6" data-aos="fade-up">
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Featured Projects</h2>
+                        <p class="text-slate-600 mt-2">Search, filter, and explore my recent work.</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-stretch gap-3 w-full md:w-auto">
+                        <label class="relative flex-1">
+                            <span class="sr-only">Search projects</span>
+                            <i data-feather="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                            <input id="search-query" placeholder="Search by title, tech, or description" class="w-full rounded-2xl border border-slate-200 bg-white pl-9 pr-3 py-2.5 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300" />
+                        </label>
+                        <div class="flex items-center gap-2">
+                            <i data-feather="filter" class="w-4 h-4 text-slate-400" aria-hidden></i>
+                            <select id="sort-order" class="rounded-2xl border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-300">
+                                <option>Newest</option>
+                                <option>Oldest</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tags-container" class="flex flex-wrap gap-2 mb-6" data-aos="fade-up" data-aos-delay="100">
+                    <!-- Tags will be injected here -->
+                </div>
+
+                <div id="projects-container" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="200">
+                    <!-- Projects will be injected here -->
+                </div>
+                <p id="no-projects-message" class="text-slate-500 hidden">No projects match your filters.</p>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact">
+            <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 w-full">
+                <div class="mb-6 text-center" data-aos="fade-up">
+                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Contact</h2>
+                    <p class="text-slate-600 mt-2">Have a brief, a prototype, or an idea? Let’s build it right.</p>
+                </div>
+
+                <form id="contact-form" class="grid md:grid-cols-2 gap-4 bg-white border border-slate-200 rounded-3xl p-5 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                    <label class="flex flex-col gap-1">
+                        <span class="text-sm text-slate-600">Your Name</span>
+                        <input required name="name" class="rounded-xl border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-300" placeholder="Your full name" />
+                    </label>
+                    <label class="flex flex-col gap-1">
+                        <span class="text-sm text-slate-600">Email</span>
+                        <input required type="email" name="email" class="rounded-xl border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-300" placeholder="you@example.com" />
+                    </label>
+                    <label class="md:col-span-2 flex flex-col gap-1">
+                        <span class="text-sm text-slate-600">Message</span>
+                        <textarea required name="message" rows="5" class="rounded-xl border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-300" placeholder="Tell me about your project, timeline, and budget range."></textarea>
+                    </label>
+                    <div class="md:col-span-2 flex items-center justify-between">
+                        <p class="text-xs text-slate-500">I usually reply within 24 hours.</p>
+                        <button type="submit" class="inline-flex items-center gap-2 rounded-2xl px-5 py-2.5 bg-slate-900 text-white shadow hover:shadow-md transition">
+                            Send Message <i data-feather="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-slate-200 py-8">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p id="footer-copyright" class="text-sm text-slate-500"></p>
+                <div class="flex items-center gap-3">
+                    <a href="#" id="footer-github-link" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 shadow-sm">
+                        <i data-feather="github" class="w-4 h-4"></i> GitHub
+                    </a>
+                    <a href="#" id="footer-linkedin-link" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 shadow-sm">
+                        <i data-feather="linkedin" class="w-4 h-4"></i> LinkedIn
+                    </a>
+                    <a href="#" id="footer-email-link" class="inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 shadow-sm">
+                        <i data-feather="mail" class="w-4 h-4"></i> Email
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // --- DATA ---
+        const PROFILE = {
+            name: "Muneeb Rehman",
+            role: "Professional Website Designer & Coder",
+            tagline: "I build sleek, fast, conversion-focused websites and web apps with a designer’s eye and a coder’s discipline.",
+            location: "Lahore, Pakistan",
+            availability: "Open to freelance & remote",
+            email: "muneeb@example.com",
+            linkedin: "https://www.linkedin.com/",
+            github: "https://github.com/",
+            resumeUrl: "#",
+        };
+
+        const SKILLS = [
+            { name: "API Integration", icon: "git-merge" },
+            { name: "HTML", icon: "code" },
+            { name: "CSS", icon: "pen-tool" },
+            { name: "Python", icon: "terminal" },
+            { name: "SQL Databases", icon: "database" },
+            { name: "SSMS", icon: "server" },
+            { name: "Bootstrap", icon: "layout" },
+            { name: "AI Prompt Engineer", icon: "edit-3" },
+            { name: "SEO & Performance", icon: "activity" },
+            { name: "Web3 Forms", icon: "share-2" },
+        ];
+
+        const ALL_TAGS = ["All", "API", "HTML", "CSS", "Python", "SQL", "Bootstrap", "AI", "Web3", "Frontend", "Backend", "Full-Stack", "Coming Soon"];
+
+        const PROJECTS = [
+            { id: 1, title: "Nexus Fetcher Scraper", year: 2025, description: "A high-performance web scraping tool built with a resilient backend to fetch and process data from multiple sources concurrently.", tags: ["Full-Stack", "Backend", "Node", "React"], image: "https://images.unsplash.com/photo-1555949963-ff98c8708533?q=80&w=1600&auto=format&fit=crop", live: "#", repo: "#" },
+            { id: 2, title: "Future Project", year: 2026, description: "Details about this exciting new project are coming soon. Stay tuned!", tags: ["Coming Soon"], image: null, live: "#", repo: "#" },
+            { id: 3, title: "Another Future Project", year: 2026, description: "Details about this exciting new project are coming soon. Stay tuned!", tags: ["Coming Soon"], image: null, live: "#", repo: "#" },
+        ];
+
+        const STAT_ITEMS = [
+            { label: "Years Experience", value: "3+" },
+            { label: "Projects", value: "20+" },
+            { label: "Client Satisfaction", value: "100%" },
+        ];
+
+        // --- RENDER LOGIC ---
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init({ duration: 600, once: true, offset: 200 });
+            
+            // Populate static data
+            document.title = `${PROFILE.name} – Portfolio`;
+            document.getElementById('header-name').textContent = PROFILE.name;
+            document.getElementById('header-resume-link').href = PROFILE.resumeUrl;
+            document.getElementById('hero-availability').textContent = PROFILE.availability;
+            document.getElementById('hero-role').textContent = PROFILE.role;
+            document.getElementById('hero-tagline').textContent = PROFILE.tagline;
+            document.getElementById('hero-email-link').href = `mailto:${PROFILE.email}`;
+            document.getElementById('hero-github-link').href = PROFILE.github;
+            document.getElementById('hero-linkedin-link').href = PROFILE.linkedin;
+            document.getElementById('hero-location').textContent = PROFILE.location;
+            document.getElementById('footer-copyright').textContent = `© ${new Date().getFullYear()} ${PROFILE.name}. All rights reserved.`;
+            document.getElementById('footer-github-link').href = PROFILE.github;
+            document.getElementById('footer-linkedin-link').href = PROFILE.linkedin;
+            document.getElementById('footer-email-link').href = `mailto:${PROFILE.email}`;
+
+            // Populate dynamic containers
+            const statsContainer = document.getElementById('stats-container');
+            statsContainer.innerHTML = STAT_ITEMS.map(s => `
+                <div class="rounded-2xl bg-white border border-slate-200 p-4 shadow-sm text-center">
+                    <div class="text-2xl font-bold">${s.value}</div>
+                    <div class="text-xs text-slate-500">${s.label}</div>
+                </div>
+            `).join('');
+
+            const skillsContainer = document.getElementById('skills-container');
+            skillsContainer.innerHTML = SKILLS.map(s => `
+                <div class="rounded-2xl bg-white border border-slate-200 p-4 shadow-sm flex items-center gap-3">
+                    <span class="shrink-0 inline-grid place-items-center w-9 h-9 rounded-xl bg-slate-100 border border-slate-200">
+                        <i data-feather="${s.icon}" class="w-4 h-4"></i>
+                    </span>
+                    <span class="font-medium">${s.name}</span>
+                </div>
+            `).join('');
+
+            const tagsContainer = document.getElementById('tags-container');
+            tagsContainer.innerHTML = ALL_TAGS.map(t => `
+                <button data-tag="${t}" class="tag-button px-3 py-1.5 rounded-full border text-sm shadow-sm ${t === 'All' ? 'bg-slate-900 text-white border-slate-900' : 'bg-white border-slate-200 hover:bg-slate-50'}">
+                    ${t}
+                </button>
+            `).join('');
+
+            feather.replace();
+
+            // --- FILTERING & SORTING LOGIC ---
+            let query = "";
+            let activeTag = "All";
+            let sort = "Newest";
+
+            const searchQuery = document.getElementById('search-query');
+            const sortOrder = document.getElementById('sort-order');
+            const tagButtons = document.querySelectorAll('.tag-button');
+            const projectsContainer = document.getElementById('projects-container');
+            const noProjectsMessage = document.getElementById('no-projects-message');
+
+            function renderProjects() {
+                const filtered = PROJECTS.filter(p => {
+                    const matchesQuery = query.trim().length === 0 || [p.title, p.description, p.tags.join(" ")].join(" ").toLowerCase().includes(query.toLowerCase());
+                    const matchesTag = activeTag === "All" || p.tags.includes(activeTag);
+                    return matchesQuery && matchesTag;
+                });
+
+                filtered.sort((a, b) => (sort === "Newest" ? b.year - a.year : a.year - b.year));
+
+                if (filtered.length === 0) {
+                    projectsContainer.innerHTML = '';
+                    noProjectsMessage.classList.remove('hidden');
+                } else {
+                    noProjectsMessage.classList.add('hidden');
+                    projectsContainer.innerHTML = filtered.map(p => {
+                        const isComingSoon = p.tags.includes('Coming Soon');
+
+                        const imageHtml = isComingSoon 
+                            ? `<div class="aspect-video relative flex items-center justify-center placeholder-image">
+                                 <span class="text-2xl font-semibold text-slate-500 tracking-widest">Coming Soon...</span>
+                               </div>`
+                            : `<a href="${p.live}" target="_blank" rel="noreferrer" class="block">
+                                 <div class="aspect-video relative overflow-hidden">
+                                     <img src="${p.image}" alt="${p.title} preview" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src='https://placehold.co/600x400/e5e7eb/4b5563?text=Image+Not+Found';">
+                                 </div>
+                               </a>`;
+                        
+                        const linksHtml = isComingSoon
+                            ? `<div class="flex items-center gap-3 pt-1">
+                                 <span class="inline-flex items-center gap-1 text-sm text-slate-400">Stay Tuned</span>
+                               </div>`
+                            : `<div class="flex items-center gap-3 pt-1">
+                                 <a href="${p.live}" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 text-sm font-medium hover:underline">
+                                     Live <i data-feather="external-link" class="w-4 h-4"></i>
+                                 </a>
+                                 <a href="${p.repo}" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 text-sm text-slate-600 hover:underline">
+                                     Code <i data-feather="github" class="w-4 h-4"></i>
+                                 </a>
+                               </div>`;
+
+                        return `
+                        <article class="rounded-3xl overflow-hidden bg-white border border-slate-200 shadow-sm group">
+                            ${imageHtml}
+                            <div class="p-5 space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="font-semibold text-lg">${p.title}</h3>
+                                    <span class="text-xs px-2 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-600 inline-flex items-center gap-1">
+                                        <i data-feather="calendar" class="w-3 h-3"></i> ${p.year}
+                                    </span>
+                                </div>
+                                <p class="text-sm text-slate-600">${p.description}</p>
+                                <div class="flex flex-wrap gap-2 pt-1">
+                                    ${p.tags.map(t => `<span class="text-xs px-2 py-1 rounded-full ${t === 'Coming Soon' ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-slate-50 border-slate-200 text-slate-600'}">${t}</span>`).join('')}
+                                </div>
+                                ${linksHtml}
+                            </div>
+                        </article>
+                    `}).join('');
+                    feather.replace();
+                }
+            }
+            
+            searchQuery.addEventListener('input', (e) => {
+                query = e.target.value;
+                renderProjects();
+            });
+
+            sortOrder.addEventListener('change', (e) => {
+                sort = e.target.value;
+                renderProjects();
+            });
+
+            tagButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    activeTag = button.dataset.tag;
+                    tagButtons.forEach(btn => {
+                        btn.classList.remove('bg-slate-900', 'text-white', 'border-slate-900');
+                        btn.classList.add('bg-white', 'border-slate-200', 'hover:bg-slate-50');
+                    });
+                    button.classList.add('bg-slate-900', 'text-white', 'border-slate-900');
+                    button.classList.remove('bg-white', 'border-slate-200', 'hover:bg-slate-50');
+                    renderProjects();
+                });
+            });
+
+            renderProjects();
+
+            // --- CONTACT FORM ---
+            const contactForm = document.getElementById('contact-form');
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(contactForm);
+                const name = formData.get("name");
+                const email = formData.get("email");
+                const message = formData.get("message");
+                const subject = encodeURIComponent(`Portfolio inquiry from ${name || "someone"}`);
+                const body = encodeURIComponent(`${message}\n\nFrom: ${name} <${email}>`);
+                window.location.href = `mailto:${PROFILE.email}?subject=${subject}&body=${body}`;
+            });
+        });
+    </script>
+</body>
+</html>
