@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muneeb Ur Rehman – Portfolio</title>
+    <title>Muneeb Rehman – Portfolio</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23111827'/><text x='50' y='50' font-size='50' fill='white' text-anchor='middle' dy='.1em' font-family='Inter, sans-serif' font-weight='bold'>MR</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -106,7 +106,7 @@
                             <a href="#projects" class="rounded-2xl px-5 py-2.5 bg-slate-900 text-white shadow hover:shadow-md transition">
                                 View Projects
                             </a>
-                            <a href="#contact" id="hero-email-link" class="rounded-2xl px-5 py-2.5 bg-white border border-slate-200 hover:bg-slate-50 shadow-sm transition inline-flex items-center gap-2">
+                            <a href="#" id="hero-email-link" class="rounded-2xl px-5 py-2.5 bg-white border border-slate-200 hover:bg-slate-50 shadow-sm transition inline-flex items-center gap-2">
                                 <i data-feather="mail" class="w-4 h-4"></i> Contact Me
                             </a>
                             <a href="#" id="hero-github-link" target="_blank" rel="noreferrer" class="rounded-2xl px-4 py-2.5 bg-white border border-slate-200 hover:bg-slate-50 shadow-sm transition inline-flex items-center gap-2" aria-label="GitHub">
@@ -204,8 +204,6 @@
                 </div>
 
                 <form id="contact-form" class="grid md:grid-cols-2 gap-4 bg-white border border-slate-200 rounded-3xl p-5 shadow-sm" data-aos="fade-up" data-aos-delay="100">
-                    <!-- Insert your Web3Forms access key here -->
-                    <input type="hidden" name="access_key" value="04a9818c-0054-43ea-9436-d0e64435840b">
                     <label class="flex flex-col gap-1">
                         <span class="text-sm text-slate-600">Your Name</span>
                         <input required name="name" class="rounded-xl border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-300" placeholder="Your full name" />
@@ -224,7 +222,6 @@
                             Send Message <i data-feather="arrow-right" class="w-4 h-4"></i>
                         </button>
                     </div>
-                    <div id="form-status-message" class="md:col-span-2 text-center text-sm hidden"></div>
                 </form>
             </div>
         </section>
@@ -252,16 +249,17 @@
     <script>
         // --- DATA ---
         const PROFILE = {
-            id: 1,
-title: "Nexus Fetcher Scraper",
-year: 2025,
-description: "NexusFetcher is a professional automation tool for scraping web data, featuring a modern GUI, Google Sheets integration, and headless operation.",
-tags: ["Full-Stack", "Backend", "Node", "React"],
-image: "https://drive.google.com/uc?export=view&id=1oMSsH8q-BQCP_gkg21g_5L3FxMWt833-",
-placeholder: "https://images.unsplash.com/photo-1555949963-ff98c8708533?q=80&w=1600&auto=format&fit=crop",
-live: "#",
-repo: "#"
-},
+            name: "Muneeb Rehman",
+            role: "Professional Website Designer & Coder",
+            tagline: "I build sleek, fast, conversion-focused websites and web apps with a designer’s eye and a coder’s discipline.",
+            location: "Lahore, Pakistan",
+            availability: "Open to freelance & remote",
+            email: "muneeb@example.com",
+            linkedin: "https://www.linkedin.com/",
+            github: "https://github.com/",
+            resumeUrl: "#",
+        };
+
         const SKILLS = [
             { name: "API Integration", icon: "git-merge" },
             { name: "HTML", icon: "code" },
@@ -278,7 +276,7 @@ repo: "#"
         const ALL_TAGS = ["All", "API", "HTML", "CSS", "Python", "SQL", "Bootstrap", "AI", "Web3", "Frontend", "Backend", "Full-Stack", "Coming Soon"];
 
         const PROJECTS = [
-            { id: 1, title: "Nexus Fetcher Scraper", year: 2025, description: "NexusFetcher is a professional automation tool for scraping web data, featuring a modern GUI, Google Sheets integration, and headless operation.", tags: ["Full-Stack", "Backend", "Node", "React"], image: "https://drive.google.com/uc?export=view&id=1oMSsH8q-BQCP_gkg21g_5L3FxMWt833-", live: "#", repo: "#" },
+            { id: 1, title: "Nexus Fetcher Scraper", year: 2025, description: "A high-performance web scraping tool built with a resilient backend to fetch and process data from multiple sources concurrently.", tags: ["Full-Stack", "Backend", "Node", "React"], image: "https://i.ibb.co/0x8Ww5r/Default-A-sleek-techforward-brand-logo-centered-on-a-dark-back-0-1-1.jpg", live: "#", repo: "#" },
             { id: 2, title: "Future Project", year: 2026, description: "Details about this exciting new project are coming soon. Stay tuned!", tags: ["Coming Soon"], image: null, live: "#", repo: "#" },
             { id: 3, title: "Another Future Project", year: 2026, description: "Details about this exciting new project are coming soon. Stay tuned!", tags: ["Coming Soon"], image: null, live: "#", repo: "#" },
         ];
@@ -300,7 +298,7 @@ repo: "#"
             document.getElementById('hero-availability').textContent = PROFILE.availability;
             document.getElementById('hero-role').textContent = PROFILE.role;
             document.getElementById('hero-tagline').textContent = PROFILE.tagline;
-            document.getElementById('hero-email-link').href = `#contact`;
+            document.getElementById('hero-email-link').href = `mailto:${PROFILE.email}`;
             document.getElementById('hero-github-link').href = PROFILE.github;
             document.getElementById('hero-linkedin-link').href = PROFILE.linkedin;
             document.getElementById('hero-location').textContent = PROFILE.location;
@@ -340,7 +338,7 @@ repo: "#"
             // --- FILTERING & SORTING LOGIC ---
             let query = "";
             let activeTag = "All";
-            let sort = "Oldest";
+            let sort = "Newest";
 
             const searchQuery = document.getElementById('search-query');
             const sortOrder = document.getElementById('sort-order');
@@ -355,7 +353,7 @@ repo: "#"
                     return matchesQuery && matchesTag;
                 });
 
-                filtered.sort((a, b) => (sort === "Oldest" ? b.year - a.year : a.year - b.year));
+                filtered.sort((a, b) => (sort === "Newest" ? b.year - a.year : a.year - b.year));
 
                 if (filtered.length === 0) {
                     projectsContainer.innerHTML = '';
@@ -367,29 +365,29 @@ repo: "#"
 
                         const imageHtml = isComingSoon 
                             ? `<div class="aspect-video relative flex items-center justify-center placeholder-image">
-                                   <span class="text-2xl font-semibold text-slate-500 tracking-widest">Coming Soon...</span>
+                                 <span class="text-2xl font-semibold text-slate-500 tracking-widest">Coming Soon...</span>
                                </div>`
                             : `<a href="${p.live}" target="_blank" rel="noreferrer" class="block">
-                                   <div class="aspect-video relative overflow-hidden">
-                                       <img src="${p.image}" alt="${p.title} preview" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src='https://placehold.co/600x400/e5e7eb/4b5563?text=Image+Not+Found';">
-                                   </div>
+                                 <div class="aspect-video relative overflow-hidden">
+                                     <img src="${p.image}" alt="${p.title} preview" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src='https://placehold.co/600x400/e5e7eb/4b5563?text=Image+Not+Found';">
+                                 </div>
                                </a>`;
                         
                         const linksHtml = isComingSoon
                             ? `<div class="flex items-center gap-3 pt-1">
-                                   <span class="inline-flex items-center gap-1 text-sm text-slate-400">Stay Tuned</span>
+                                 <span class="inline-flex items-center gap-1 text-sm text-slate-400">Stay Tuned</span>
                                </div>`
                             : `<div class="flex items-center gap-3 pt-1">
-                                   <a href="${p.live}" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 text-sm font-medium hover:underline">
-                                       Live <i data-feather="external-link" class="w-4 h-4"></i>
-                                   </a>
-                                   <a href="${p.repo}" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 text-sm text-slate-600 hover:underline">
-                                       Code <i data-feather="github" class="w-4 h-4"></i>
-                                   </a>
+                                 <a href="${p.live}" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 text-sm font-medium hover:underline">
+                                     Live <i data-feather="external-link" class="w-4 h-4"></i>
+                                 </a>
+                                 <a href="${p.repo}" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 text-sm text-slate-600 hover:underline">
+                                     Code <i data-feather="github" class="w-4 h-4"></i>
+                                 </a>
                                </div>`;
 
                         return `
-                        <article class="rounded-3xl overflow-hidden bg-white border border-slate-200 shadow-sm group" data-aos="fade-up">
+                        <article class="rounded-3xl overflow-hidden bg-white border border-slate-200 shadow-sm group">
                             ${imageHtml}
                             <div class="p-5 space-y-3">
                                 <div class="flex items-center justify-between">
@@ -433,49 +431,21 @@ repo: "#"
                 });
             });
 
-            // --- CONTACT FORM SUBMISSION TO WEB3FORMS ---
+            renderProjects();
+
+            // --- CONTACT FORM ---
             const contactForm = document.getElementById('contact-form');
-            const formStatusMessage = document.getElementById('form-status-message');
-            contactForm.addEventListener('submit', async (e) => {
+            contactForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const formData = new FormData(contactForm);
-                const object = Object.fromEntries(formData);
-                const json = JSON.stringify(object);
-                formStatusMessage.classList.remove('hidden', 'text-green-600', 'text-red-600');
-                formStatusMessage.textContent = 'Sending...';
-
-                try {
-                    const response = await fetch("https://api.web3forms.com/submit", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Accept": "application/json"
-                        },
-                        body: json
-                    });
-
-                    const result = await response.json();
-                    if (result.success) {
-                        formStatusMessage.textContent = 'Message sent successfully!';
-                        formStatusMessage.classList.add('text-green-600');
-                        contactForm.reset();
-                    } else {
-                        console.error(result.message);
-                        formStatusMessage.textContent = 'Failed to send message. Please try again.';
-                        formStatusMessage.classList.add('text-red-600');
-                    }
-                } catch (error) {
-                    console.error('Error submitting form:', error);
-                    formStatusMessage.textContent = 'An error occurred. Please try again later.';
-                    formStatusMessage.classList.add('text-red-600');
-                }
+                const name = formData.get("name");
+                const email = formData.get("email");
+                const message = formData.get("message");
+                const subject = encodeURIComponent(`Portfolio inquiry from ${name || "someone"}`);
+                const body = encodeURIComponent(`${message}\n\nFrom: ${name} <${email}>`);
+                window.location.href = `mailto:${PROFILE.email}?subject=${subject}&body=${body}`;
             });
-
-            // Initial render
-            renderProjects();
         });
     </script>
 </body>
 </html>
-
-
