@@ -191,6 +191,9 @@
                 <div id="projects-container" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="200">
                     <!-- Projects will be injected here -->
                 </div>
+                <div id="show-more-container" class="text-center mt-8" data-aos="fade-up">
+                    <!-- "Show More" button will be injected here -->
+                </div>
                 <p id="no-projects-message" class="text-slate-500 hidden">No projects match your filters.</p>
             </div>
         </section>
@@ -256,7 +259,7 @@
             tagline: "I build sleek, fast, conversion-focused websites and web apps with a designer’s eye and a coder’s discipline.",
             location: "Lahore, Pakistan",
             availability: "Open to freelance & remote",
-            email: "muneeb.rehman1754@gamil.com",
+            email: "muneeb@example.com",
             linkedin: "https://www.linkedin.com/",
             github: "https://github.com/",
             resumeUrl: "#",
@@ -279,7 +282,7 @@
 
         const PROJECTS = [
             { id: 1, title: "NextGen Agency Website", year: 2025, description: "A sleek, modern agency website with a focus on clean design and user experience.", tags: ["Frontend", "UI/UX", "HTML", "CSS"], image: "https://i.ibb.co/q366nmmQ/Default-A-sleek-black-modern-agency-logo-for-Nextgen-Agency-Mi-0.jpg", live: "https://muneebrehman-17.github.io/NextGen/index.html", repo: "#" },
-            { id: 2, title: "Nexus Fetcher Scraper", year: 2025, description: "A high-performance web scraping tool built with a resilient backend to fetch and process data from multiple sources concurrently.", tags: ["Full-Stack", "Backend", "Node", "React"], image: "https://i.ibb.co/0x8Ww5r/Default-A-sleek-techforward-brand-logo-centered-on-a-dark-back-0-1-1.jpg", live: "#", repo: "https://github.com/muneebrehman-17/Portfolio/blob/c5ffb4f72699125f7fc34c220f854f2975fd87de/Nexus%20Fetcher%20Full" },
+            { id: 2, title: "Nexus Fetcher Scraper", year: 2025, description: "A high-performance web scraping tool built with a resilient backend to fetch and process data from multiple sources concurrently.", tags: ["Full-Stack", "Backend", "Node", "React"], image: "https://i.ibb.co/QvZnGZv8/Default-A-sleek-techforward-brand-logo-centered-on-a-dark-back-0-1-1.jpg", live: "#", repo: "https://github.com/muneebrehman-17/Portfolio/blob/c5ffb4f72699125f7fc34c220f854f2975fd87de/Nexus%20Fetcher%20Full" },
             { id: 3, title: "Future Project", year: 2026, description: "Details about this exciting new project are coming soon. Stay tuned!", tags: ["Coming Soon"], image: null, live: "#", repo: "#" },
             { id: 4, title: "Another Future Project", year: 2026, description: "Details about this exciting new project are coming soon. Stay tuned!", tags: ["Coming Soon"], image: null, live: "#", repo: "#" },
         ];
@@ -342,28 +345,40 @@
             let query = "";
             let activeTag = "All";
             let sort = "Newest";
+            let showAll = false;
 
             const searchQuery = document.getElementById('search-query');
             const sortOrder = document.getElementById('sort-order');
             const tagButtons = document.querySelectorAll('.tag-button');
             const projectsContainer = document.getElementById('projects-container');
             const noProjectsMessage = document.getElementById('no-projects-message');
+            const showMoreContainer = document.getElementById('show-more-container');
 
             function renderProjects() {
-                const filtered = PROJECTS.filter(p => {
+                let filtered = PROJECTS.filter(p => {
                     const matchesQuery = query.trim().length === 0 || [p.title, p.description, p.tags.join(" ")].join(" ").toLowerCase().includes(query.toLowerCase());
                     const matchesTag = activeTag === "All" || p.tags.includes(activeTag);
                     return matchesQuery && matchesTag;
                 });
 
-                filtered.sort((a, b) => (sort === "Newest" ? b.year - a.year : a.year - b.year));
+                // Custom sort to always put "Coming Soon" projects last
+                filtered.sort((a, b) => {
+                    const aIsComingSoon = a.tags.includes('Coming Soon');
+                    const bIsComingSoon = b.tags.includes('Coming Soon');
+                    if (aIsComingSoon && !bIsComingSoon) return 1;
+                    if (!aIsComingSoon && bIsComingSoon) return -1;
+                    return sort === "Newest" ? b.year - a.year : a.year - b.year;
+                });
 
-                if (filtered.length === 0) {
+                const publishedProjects = filtered.filter(p => !p.tags.includes('Coming Soon'));
+                const projectsToDisplay = showAll ? filtered : publishedProjects.slice(0, 3);
+
+                if (projectsToDisplay.length === 0 && query.trim() !== '') {
                     projectsContainer.innerHTML = '';
                     noProjectsMessage.classList.remove('hidden');
                 } else {
                     noProjectsMessage.classList.add('hidden');
-                    projectsContainer.innerHTML = filtered.map(p => {
+                    projectsContainer.innerHTML = projectsToDisplay.map(p => {
                         const isComingSoon = p.tags.includes('Coming Soon');
 
                         const imageHtml = isComingSoon 
@@ -409,6 +424,18 @@
                     `}).join('');
                     feather.replace();
                 }
+
+                // Handle "Show More" button visibility
+                if (!showAll && filtered.length > 3) {
+                    showMoreContainer.innerHTML = `
+                        <button id="show-more-btn" class="rounded-2xl px-5 py-2.5 bg-white border border-slate-200 hover:bg-slate-50 shadow-sm transition inline-flex items-center gap-2">
+                            Show More <i data-feather="chevron-down" class="w-4 h-4"></i>
+                        </button>
+                    `;
+                    feather.replace();
+                } else {
+                    showMoreContainer.innerHTML = '';
+                }
             }
             
             searchQuery.addEventListener('input', (e) => {
@@ -423,6 +450,7 @@
 
             tagButtons.forEach(button => {
                 button.addEventListener('click', () => {
+                    showAll = false; // Reset view when tag changes
                     activeTag = button.dataset.tag;
                     tagButtons.forEach(btn => {
                         btn.classList.remove('bg-slate-900', 'text-white', 'border-slate-900');
@@ -432,6 +460,13 @@
                     button.classList.remove('bg-white', 'border-slate-200', 'hover:bg-slate-50');
                     renderProjects();
                 });
+            });
+            
+            showMoreContainer.addEventListener('click', (e) => {
+                if (e.target.id === 'show-more-btn') {
+                    showAll = true;
+                    renderProjects();
+                }
             });
 
             renderProjects();
@@ -486,4 +521,3 @@
     </script>
 </body>
 </html>
-
