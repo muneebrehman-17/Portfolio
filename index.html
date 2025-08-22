@@ -109,10 +109,10 @@
                             <a href="#" id="hero-email-link" class="rounded-2xl px-5 py-2.5 bg-white border border-slate-200 hover:bg-slate-50 shadow-sm transition inline-flex items-center gap-2">
                                 <i data-feather="mail" class="w-4 h-4"></i> Contact Me
                             </a>
-                            <a href="https://github.com/muneebrehman-17/Portfolio/blob/c5ffb4f72699125f7fc34c220f854f2975fd87de/Nexus%20Fetcher%20Full" id="hero-github-link" target="https://github.com/muneebrehman-17/Portfolio/blob/c5ffb4f72699125f7fc34c220f854f2975fd87de/Nexus%20Fetcher%20Full" rel="noreferrer" class="rounded-2xl px-4 py-2.5 bg-white border border-slate-200 hover:bg-slate-50 shadow-sm transition inline-flex items-center gap-2" aria-label="GitHub">
+                            <a href="#" id="hero-github-link" target="_blank" rel="noreferrer" class="rounded-2xl px-4 py-2.5 bg-white border border-slate-200 hover:bg-slate-50 shadow-sm transition inline-flex items-center gap-2" aria-label="GitHub">
                                 <i data-feather="github" class="w-4 h-4"></i>
                             </a>
-                            <a href="#" id="hero-linkedin-link" target="" rel="noreferrer" class="rounded-2xl px-4 py-2.5 bg-white border border-slate-200 hover:bg-slate-50 shadow-sm transition inline-flex items-center gap-2" aria-label="LinkedIn">
+                            <a href="#" id="hero-linkedin-link" target="_blank" rel="noreferrer" class="rounded-2xl px-4 py-2.5 bg-white border border-slate-200 hover:bg-slate-50 shadow-sm transition inline-flex items-center gap-2" aria-label="LinkedIn">
                                 <i data-feather="linkedin" class="w-4 h-4"></i>
                             </a>
                         </div>
@@ -203,7 +203,8 @@
                     <p class="text-slate-600 mt-2">Have a brief, a prototype, or an idea? Let’s build it right.</p>
                 </div>
 
-                <form id="contact-form" class="grid md:grid-cols-2 gap-4 bg-white border border-slate-200 rounded-3xl p-5 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="grid md:grid-cols-2 gap-4 bg-white border border-slate-200 rounded-3xl p-5 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                    <input type="hidden" name="access_key" value="04a9818c-0054-43ea-9436-d0e64435840b">
                     <label class="flex flex-col gap-1">
                         <span class="text-sm text-slate-600">Your Name</span>
                         <input required name="name" class="rounded-xl border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-300" placeholder="Your full name" />
@@ -222,6 +223,7 @@
                             Send Message <i data-feather="arrow-right" class="w-4 h-4"></i>
                         </button>
                     </div>
+                    <div id="form-result" class="md:col-span-2 text-center mt-2"></div>
                 </form>
             </div>
         </section>
@@ -254,7 +256,7 @@
             tagline: "I build sleek, fast, conversion-focused websites and web apps with a designer’s eye and a coder’s discipline.",
             location: "Lahore, Pakistan",
             availability: "Open to freelance & remote",
-            email: "muneeb.rehman1754@gmail.com",
+            email: "muneeb@example.com",
             linkedin: "https://www.linkedin.com/",
             github: "https://github.com/",
             resumeUrl: "#",
@@ -276,19 +278,10 @@
         const ALL_TAGS = ["All", "API", "HTML", "CSS", "Python", "SQL", "Bootstrap", "AI", "Web3", "Frontend", "Backend", "Full-Stack", "Coming Soon"];
 
         const PROJECTS = [
-            { 
-        id: 1, 
-        title: "NextGen Agency Website", 
-        year: 2025, 
-        description: "A sleek, modern agency website with a focus on clean design and user experience.", 
-        tags: ["Frontend", "UI/UX", "HTML", "CSS"], 
-        image: "https://i.ibb.co/q366nmmQ/Default-A-sleek-black-modern-agency-logo-for-Nextgen-Agency-Mi-0.jpg", 
-        live: "https://muneebrehman-17.github.io/NextGen/index.html", 
-        repo: "#" 
-    },
-            { id: 1, title: "Nexus Fetcher Scraper", year: 2025, description: "A high-performance web scraping tool built with a resilient backend to fetch and process data from multiple sources concurrently.", tags: ["Full-Stack", "Backend", "Python", "Selenium"], image: "https://i.ibb.co/QvZnGZv8/Default-A-sleek-techforward-brand-logo-centered-on-a-dark-back-0-1-1.jpg", live: "https://github.com/muneebrehman-17/Portfolio/blob/c5ffb4f72699125f7fc34c220f854f2975fd87de/Nexus%20Fetcher%20Full", repo: "https://github.com/muneebrehman-17/Portfolio/blob/c5ffb4f72699125f7fc34c220f854f2975fd87de/Nexus%20Fetcher%20Full" },
-            { id: 2, title: "Future Project", year: 2026, description: "Details about this exciting new project are coming soon. Stay tuned!", tags: ["Coming Soon"], image: null, live: "#", repo: "#" },
-            { id: 3, title: "Another Future Project", year: 2026, description: "Details about this exciting new project are coming soon. Stay tuned!", tags: ["Coming Soon"], image: null, live: "#", repo: "#" },
+            { id: 1, title: "NextGen Agency Website", year: 2025, description: "A sleek, modern agency website with a focus on clean design and user experience.", tags: ["Frontend", "UI/UX", "HTML", "CSS"], image: "https://i.ibb.co/q366nmmQ/Default-A-sleek-black-modern-agency-logo-for-Nextgen-Agency-Mi-0.jpg", live: "https://muneebrehman-17.github.io/NextGen/index.html", repo: "#" },
+            { id: 2, title: "Nexus Fetcher Scraper", year: 2025, description: "A high-performance web scraping tool built with a resilient backend to fetch and process data from multiple sources concurrently.", tags: ["Full-Stack", "Backend", "Node", "React"], image: "https://i.ibb.co/0x8Ww5r/Default-A-sleek-techforward-brand-logo-centered-on-a-dark-back-0-1-1.jpg", live: "#", repo: "https://github.com/muneebrehman-17/Portfolio/blob/c5ffb4f72699125f7fc34c220f854f2975fd87de/Nexus%20Fetcher%20Full" },
+            { id: 3, title: "Future Project", year: 2026, description: "Details about this exciting new project are coming soon. Stay tuned!", tags: ["Coming Soon"], image: null, live: "#", repo: "#" },
+            { id: 4, title: "Another Future Project", year: 2026, description: "Details about this exciting new project are coming soon. Stay tuned!", tags: ["Coming Soon"], image: null, live: "#", repo: "#" },
         ];
 
         const STAT_ITEMS = [
@@ -443,25 +436,53 @@
 
             renderProjects();
 
-            // --- CONTACT FORM ---
-            const contactForm = document.getElementById('contact-form');
-            contactForm.addEventListener('submit', (e) => {
+            // --- CONTACT FORM with Web3Forms ---
+            const form = document.getElementById('contact-form');
+            const result = document.getElementById('form-result');
+
+            form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                const formData = new FormData(contactForm);
-                const name = formData.get("name");
-                const email = formData.get("email");
-                const message = formData.get("message");
-                const subject = encodeURIComponent(`Portfolio inquiry from ${name || "someone"}`);
-                const body = encodeURIComponent(`${message}\n\nFrom: ${name} <${email}>`);
-                window.location.href = `mailto:${PROFILE.email}?subject=${subject}&body=${body}`;
+                const formData = new FormData(form);
+                const object = {};
+                formData.forEach((value, key) => {
+                    object[key] = value;
+                });
+                const json = JSON.stringify(object);
+                result.innerHTML = "Please wait...";
+
+                fetch('https://api.web3forms.com/submit', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: json
+                    })
+                    .then(async (response) => {
+                        let json = await response.json();
+                        if (response.status == 200) {
+                            result.innerHTML = "Form submitted successfully!";
+                            result.classList.add('text-green-500');
+                        } else {
+                            console.log(response);
+                            result.innerHTML = json.message;
+                            result.classList.add('text-red-500');
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        result.innerHTML = "Something went wrong!";
+                        result.classList.add('text-red-500');
+                    })
+                    .then(function() {
+                        form.reset();
+                        setTimeout(() => {
+                            result.innerHTML = '';
+                            result.classList.remove('text-green-500', 'text-red-500');
+                        }, 3000);
+                    });
             });
         });
     </script>
 </body>
 </html>
-
-
-
-
-
-
