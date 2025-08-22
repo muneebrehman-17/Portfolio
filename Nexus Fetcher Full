@@ -21,9 +21,9 @@ import psutil
 SERVICE_ACCOUNT_INFO = {
   "type": "service_account",
   "project_id": "nexusfetcher-sheets",
-  "private_key_id": "3d032e7993de0bebae2e15828860bf37bc353a47",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDLG0KKxnCQjIAF\nH2rAIbany0mAI0wW+umunbtg9A4c9uZKXDPmxYtBqqRUoQMvqYsID98vZx9fvYHM\nCzWb+apaWqLUGjeHw3qUSsJ6igFbytnA+NSkwHVLaTnaiHaAuMitn66tzJtSBKAo\nHyGIiX/J8TuChp+Yu9d8Kl6Z89M40WzQjdgOJmLfk7GeTK43MaYcQcvq0fQOIGGu\n5XKrxHojtUN0Amkax2PEcKLDJLasjsQXjgTDDmOMuMZZ509nnjFoeYdNvhTh+ir9\n3Mo9UeOWcc4WSPyIQBVpvvbiEyutayGXpzkv0XIi/ZE/W9Xt1hKRd0z9WrCJLe2S\nGbnGpteTAgMBAAECggEABFZhsdZtnmZa3hyROAvARLKA1Oa1NtoiVf67eveSKHGf\nFtKWHSms0zjksKhEwLjSCkZ2yGuoW7k0LtXEu77+w+iiv49nMsG+8NU2K3JVCfPM\nDBuo1uEDlxn5LVEhl+AjfrLcubEpn2oP39ALhpHu3NdQbHWZiX+c4AgXCNE06EYc\nn92QYDLPV9HToRiF0t5vb/vBlF6J22UjB8TWMgXpy7z25BQYZkUsrsWSZDp3dGbz\nMp5fC2udTjvemx2LVEhl+AjfrLcubEpn2oP39ALhpHu3NdQbHWZiX+c4AgXCNE06EYc\nn92QYDLPV9HToRiF0t5vb/vBlF6J22UjB8TWMgXpy7z25BQYZkUsrsWSZDp3dGbz\nMp5fC2udTjvemx2heSqKMYu7hV0LzqKpaCJswpB+RuW+EjoWzjKLFdPBMx2xpAf5\nbLyjT21jVfyNr+zmw0XQ0yE+yggVD+p1+sClHYyiWQKBgQDy2luZ1tfXenlbeTqi\nD1bdJNcTlI86OV4G5UReIfG/8oT3PvOD7Y/Cefpnep/oIFDEwWITtSr5Ar0DCpK0\nI5QTNIBkRDNL1sjrISXyLLCWaFV3TpfrVxS1vkicxMfdwHxHi5DFv1ZVf/axHqcc\nBg9R5ihZ1wa3Z++GLHVColQnPQKBgQDWGhClvG8BBgkPgJPg1pFUHOegCfAqIDLs\n2RIMdq0AfprSK5NKBos0LhBRr/7DagQCPNNXtOXsLHuYpDy/BfOAaWW5CN0QpasP\n2HWq9zy6cD5Jxc6dYbwBnFyv30D5oHDzQ3+4zcT/9JmoWy7JSl2B6e4mu5vQk2Py\nRHkjnptnDwKBgDRrUY5ZQ2mtc/h8qF1GtlcxloMRdAD7VQJkBmfTJ91oua6sld+K\nLZeqwJQJce6m2wg9PbBHUKlDIA1CAPyFGXczw+rglbnu+JtYIlqtrsgoaRpBiqUv\nvLamBgJgr0t8Otculuc4L6hw4IzGswdnf3MMHPWXZkm8U4VAn2bspwF5AoGAQDNo\nsooiryfkJ6XishUlVxejzTWtsrQdETC2XM5pajCMtGEktZnovCjj89rWhjqQISuk\nJDS2jW95UHhPTui179erDSU/RPKorQO3pSCmMTHfO7f5EPBxs/nzQTms/i3CMPAY\nqI3reOUb/oP5L5sBFyfSpgKz4oOQAOHPgYLaDrgCgYEA7G690pG8GH0zcyUb+TcU\nrLebGeWu9fPDYUCU7FO5xZvzcM/9UvH5fwbk/wSZTCBwe2IEbmC4qXh5KyQeYu2w\nyXEdHhfLvNJScnnzWGH9Z50wYz+MydAsI2FFFNzOCS+jGgJGqEEI16XCMOc7EJYo\ns8xo9+ZRpb+T8vC0IhG7L/o=\n-----END PRIVATE KEY-----\n",
-  "client_email": "sheets-bot@nexusfetcher-sheets.iam.gserviceaccount.com",
+  "private_key_id": "",
+  "private_key": "-----BEGIN PRIVATE KEY-----\\n-----END PRIVATE KEY-----\n",
+  "client_email": "",
   "client_id": "111646858017421776639",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "token_uri": "https://oauth2.googleapis.com/token",
