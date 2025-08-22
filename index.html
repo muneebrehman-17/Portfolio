@@ -64,6 +64,29 @@
                 transform: translateX(-50%) translateY(-10px);
             }
         }
+        /* Animated Ribbon */
+        .ribbon-bg {
+            background: repeating-linear-gradient(
+                -45deg,
+                #f97316, /* orange-500 */
+                #f97316 15px,
+                #facc15 15px, /* yellow-400 */
+                #facc15 30px
+            );
+            background-size: 200% 200%;
+            animation: move-bg 30s linear infinite;
+        }
+        @keyframes move-bg {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            animation: marquee 30s linear infinite;
+        }
     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-b from-white to-slate-50 text-slate-900">
@@ -82,6 +105,13 @@
             </nav>
             <div class="md:hidden" aria-hidden>
                 <a href="#contact" class="rounded-xl px-3 py-1.5 bg-slate-900 text-white">Hire</a>
+            </div>
+        </div>
+        <!-- Animated Welcome Ribbon -->
+        <div class="ribbon-bg py-1 overflow-hidden whitespace-nowrap">
+            <div class="animate-marquee flex">
+                <span class="px-4 text-sm font-bold text-black">✨ Let's build something amazing together! Open for new projects and collaborations. ✨</span>
+                <span class="px-4 text-sm font-bold text-black">✨ Let's build something amazing together! Open for new projects and collaborations. ✨</span>
             </div>
         </div>
     </header>
@@ -121,23 +151,9 @@
                         </div>
                     </div>
 
-                    <div class="relative" data-aos="fade-up" data-aos-delay="200">
-                        <div class="aspect-[4/3] rounded-3xl bg-gradient-to-br from-slate-900 via-slate-700 to-slate-500 p-1 shadow-2xl">
-                            <div class="rounded-[22px] h-full w-full bg-[radial-gradient(1000px_400px_at_0%_0%,rgba(255,255,255,0.16),transparent)]">
-                                <div class="h-full w-full grid place-items-center text-white/90 p-8">
-                                    <div class="text-center space-y-3">
-                                        <div class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-white/70">
-                                            <i data-feather="calendar" class="w-4 h-4"></i> <span id="hero-location"></span>
-                                        </div>
-                                        <p class="text-3xl md:text-4xl font-semibold">
-                                            I design, code & ship delightful products.
-                                        </p>
-                                        <p class="text-sm text-white/80 max-w-md mx-auto">
-                                            Pixel‑perfect design systems, accessible components, and performant code.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="relative flex justify-center lg:justify-end" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-80 h-80 lg:w-96 lg:h-96 rounded-full p-2 bg-gradient-to-br from-slate-200 to-slate-100 shadow-xl">
+                             <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=1587&auto=format&fit=crop" alt="Muneeb Rehman" class="w-full h-full rounded-full object-cover">
                         </div>
                     </div>
                 </div>
@@ -250,6 +266,17 @@
         </footer>
     </main>
 
+    <!-- Welcome Popup -->
+    <div id="welcome-popup" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl shadow-xl p-8 text-center max-w-sm" data-aos="zoom-in">
+            <h2 class="text-2xl font-bold text-slate-900 mb-2">Congratulations!</h2>
+            <p class="text-slate-600 mb-6">You've found the portfolio of a passionate developer. Welcome!</p>
+            <button id="close-popup" class="rounded-xl px-5 py-2.5 bg-slate-900 text-white shadow hover:shadow-md transition">
+                Explore My Work
+            </button>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // --- DATA ---
@@ -259,7 +286,7 @@
             tagline: "I build sleek, fast, conversion-focused websites and web apps with a designer’s eye and a coder’s discipline.",
             location: "Lahore, Pakistan",
             availability: "Open to freelance & remote",
-            email: "muneeb@example.com",
+            email: "muneeb.rehman1754@gmail.com",
             linkedin: "https://www.linkedin.com/",
             github: "https://github.com/",
             resumeUrl: "#",
@@ -281,20 +308,11 @@
         const ALL_TAGS = ["All", "API", "HTML", "CSS", "Python", "SQL", "Bootstrap", "AI", "Web3", "Frontend", "Backend", "Full-Stack", "Coming Soon"];
 
         const PROJECTS = [
-            { 
-        id: 1, 
-        title: "Nexus Weather", 
-        year: 2025, 
-        description: "Elegant, real-time weather forecasts with a clean and modern design.", 
-        tags: ["Frontend Development", "API Integration", "UI/UX Design", "Responsive Web App"], 
-        image: "https://i.ibb.co/spd0jnFj/Default-A-single-minimalist-weather-icon-for-a-dark-mode-UI-fe-0.jpg", 
-        live: "https://muneebrehman-17.github.io/projects/", 
-        repo: "#" 
-    },
-            { id: 1, title: "NextGen Agency Website", year: 2025, description: "A sleek, modern agency website with a focus on clean design and user experience.", tags: ["Frontend", "UI/UX", "HTML", "CSS"], image: "https://i.ibb.co/q366nmmQ/Default-A-sleek-black-modern-agency-logo-for-Nextgen-Agency-Mi-0.jpg", live: "https://muneebrehman-17.github.io/NextGen/index.html", repo: "#" },
-            { id: 2, title: "Nexus Fetcher Scraper", year: 2025, description: "A high-performance web scraping tool built with a resilient backend to fetch and process data from multiple sources concurrently.", tags: ["Frontend", "Backend", "Python", "Selenium"], image: "https://i.ibb.co/QvZnGZv8/Default-A-sleek-techforward-brand-logo-centered-on-a-dark-back-0-1-1.jpg", live: "#", repo: "https://github.com/muneebrehman-17/Portfolio/blob/c5ffb4f72699125f7fc34c220f854f2975fd87de/Nexus%20Fetcher%20Full" },
-            { id: 3, title: "Future Project", year: 2026, description: "Details about this exciting new project are coming soon. Stay tuned!", tags: ["Coming Soon"], image: null, live: "#", repo: "#" },
-            { id: 4, title: "Another Future Project", year: 2026, description: "Details about this exciting new project are coming soon. Stay tuned!", tags: ["Coming Soon"], image: null, live: "#", repo: "#" },
+            { id: 1, title: "Nexus Weather", year: 2025, description: "Elegant, real-time weather forecasts with a clean and modern design.", tags: ["Frontend Development", "API Integration", "UI/UX Design", "Responsive Web App"], image: "https://i.ibb.co/spd0jnFj/Default-A-single-minimalist-weather-icon-for-a-dark-mode-UI-fe-0.jpg", live: "https://muneebrehman-17.github.io/projects/", repo: "#" },
+            { id: 2, title: "NextGen Agency Website", year: 2025, description: "A sleek, modern agency website with a focus on clean design and user experience.", tags: ["Frontend", "UI/UX", "HTML", "CSS"], image: "https://i.ibb.co/q366nmmQ/Default-A-sleek-black-modern-agency-logo-for-Nextgen-Agency-Mi-0.jpg", live: "https://muneebrehman-17.github.io/NextGen/index.html", repo: "#" },
+            { id: 3, title: "Nexus Fetcher Scraper", year: 2025, description: "A high-performance web scraping tool built with a resilient backend to fetch and process data from multiple sources concurrently.", tags: ["Frontend", "Backend", "Python", "Selenium"], image: "https://i.ibb.co/QvZnGZv8/Default-A-sleek-techforward-brand-logo-centered-on-a-dark-back-0-1-1.jpg", live: "#", repo: "https://github.com/muneebrehman-17/Portfolio/blob/c5ffb4f72699125f7fc34c220f854f2975fd87de/Nexus%20Fetcher%20Full" },
+            { id: 4, title: "Future Project", year: 2026, description: "Details about this exciting new project are coming soon. Stay tuned!", tags: ["Coming Soon"], image: null, live: "#", repo: "#" },
+            { id: 5, title: "Another Future Project", year: 2026, description: "Details about this exciting new project are coming soon. Stay tuned!", tags: ["Coming Soon"], image: null, live: "#", repo: "#" },
         ];
 
         const STAT_ITEMS = [
@@ -317,7 +335,6 @@
             document.getElementById('hero-email-link').href = `mailto:${PROFILE.email}`;
             document.getElementById('hero-github-link').href = PROFILE.github;
             document.getElementById('hero-linkedin-link').href = PROFILE.linkedin;
-            document.getElementById('hero-location').textContent = PROFILE.location;
             document.getElementById('footer-copyright').textContent = `© ${new Date().getFullYear()} ${PROFILE.name}. All rights reserved.`;
             document.getElementById('footer-github-link').href = PROFILE.github;
             document.getElementById('footer-linkedin-link').href = PROFILE.linkedin;
@@ -350,6 +367,19 @@
             `).join('');
 
             feather.replace();
+
+            // --- WELCOME POPUP LOGIC ---
+            const welcomePopup = document.getElementById('welcome-popup');
+            const closePopupBtn = document.getElementById('close-popup');
+            
+            if (!sessionStorage.getItem('visited')) {
+                welcomePopup.classList.remove('hidden');
+                sessionStorage.setItem('visited', 'true');
+            }
+
+            closePopupBtn.addEventListener('click', () => {
+                welcomePopup.classList.add('hidden');
+            });
 
             // --- FILTERING & SORTING LOGIC ---
             let query = "";
@@ -531,5 +561,3 @@
     </script>
 </body>
 </html>
-
-
