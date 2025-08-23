@@ -13,14 +13,21 @@
         body, html {
             font-family: 'Inter', sans-serif;
         }
-        /* Full-page scroll snap */
-        html {
-            scroll-snap-type: y mandatory;
+        body.loading {
+            overflow: hidden;
+        }
+        /* Full-page scroll snap for desktop */
+        @media (min-width: 1024px) {
+            html {
+                scroll-snap-type: y mandatory;
+            }
+            section {
+                scroll-snap-align: start;
+                min-height: 100vh;
+            }
         }
         section {
-            scroll-snap-align: start;
-            min-height: 100vh;
-            display: flex;
+             display: flex;
             align-items: center;
             justify-content: center;
         }
@@ -64,32 +71,56 @@
                 transform: translateX(-50%) translateY(-10px);
             }
         }
-        /* Animated Ribbon */
-        .ribbon-bg {
-            background: repeating-linear-gradient(
-                -45deg,
-                #f97316, /* orange-500 */
-                #f97316 15px,
-                #facc15 15px, /* yellow-400 */
-                #facc15 30px
-            );
-            background-size: 200% 200%;
-            animation: move-bg 30s linear infinite;
+        /* Preloader Styles */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            display: flex;
+            background-color: #111827; /* slate-900 */
         }
-        @keyframes move-bg {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
+        .preloader-content {
+            margin: auto;
+            text-align: center;
         }
-        @keyframes marquee {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-50%); }
+        .progress-bar {
+            width: 200px;
+            height: 4px;
+            background-color: #374151; /* gray-700 */
+            margin: 20px auto 0;
+            border-radius: 2px;
+            overflow: hidden;
         }
-        .animate-marquee {
-            animation: marquee 30s linear infinite;
+        .progress-bar-inner {
+            width: 0;
+            height: 100%;
+            background-color: #4f46e5; /* indigo-600 */
+            border-radius: 2px;
+            transition: width 1s ease-out;
+        }
+        #preloader.loaded .progress-bar-inner {
+            width: 100%;
+        }
+        #preloader.fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
         }
     </style>
 </head>
-<body class="min-h-screen bg-gradient-to-b from-white to-slate-50 text-slate-900">
+<body class="loading min-h-screen bg-gradient-to-b from-white to-slate-50 text-slate-900">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="text-white text-3xl font-bold">Muneeb ur Rehman</div>
+            <div class="progress-bar">
+                <div class="progress-bar-inner"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Header -->
     <header class="sticky top-0 z-50 backdrop-blur bg-white/70 border-b border-slate-200">
@@ -103,22 +134,21 @@
                     Download CV <i data-feather="arrow-right" class="w-4 h-4"></i>
                 </a>
             </nav>
-            <div class="md:hidden" aria-hidden>
-                <a href="#contact" class="rounded-xl px-3 py-1.5 bg-slate-900 text-white">Hire</a>
-            </div>
+            <button id="mobile-menu-button" class="md:hidden">
+                <i data-feather="menu" class="w-6 h-6"></i>
+            </button>
         </div>
-        <!-- Animated Welcome Ribbon -->
-        <div class="ribbon-bg py-1 overflow-hidden whitespace-nowrap">
-            <div class="animate-marquee flex">
-                <span class="px-4 text-sm font-bold text-black">✨ Let's build something amazing together! Open for new projects and collaborations. ✨</span>
-                <span class="px-4 text-sm font-bold text-black">✨ Let's build something amazing together! Open for new projects and collaborations. ✨</span>
-            </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#skills" class="block py-2 px-4 text-sm hover:bg-slate-100">Skills</a>
+            <a href="#projects" class="block py-2 px-4 text-sm hover:bg-slate-100">Projects</a>
+            <a href="#contact" class="block py-2 px-4 text-sm hover:bg-slate-100">Contact</a>
         </div>
     </header>
 
     <main>
         <!-- Hero Section -->
-        <section id="home" class="relative">
+        <section id="home" class="relative py-20 md:py-0">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="grid lg:grid-cols-2 gap-10 items-center">
                     <div class="space-y-6" data-aos="fade-up">
@@ -128,7 +158,7 @@
                         <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
                             <span id="hero-role"></span>
                             <span class="block text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-slate-700 to-slate-400">
-                            
+                                Crafting premium web experiences
                             </span>
                         </h1>
                         <p id="hero-tagline" class="text-slate-600 text-lg max-w-2xl"></p>
@@ -151,20 +181,20 @@
                         </div>
                     </div>
 
-                    <div class="relative flex justify-center lg:justify-end" data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative flex justify-center lg:justify-end mt-10 lg:mt-0" data-aos="fade-up" data-aos-delay="200">
                         <div class="w-80 h-80 lg:w-96 lg:h-96 rounded-full p-2 bg-gradient-to-br from-slate-200 to-slate-100 shadow-xl">
                              <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?q=80&w=1587&auto=format&fit=crop" alt="Muneeb Rehman" class="w-full h-full rounded-full object-cover">
                         </div>
                     </div>
                 </div>
             </div>
-            <a href="#skills" class="scroll-down">
+            <a href="#skills" class="scroll-down hidden lg:block">
                 <i data-feather="arrow-down" class="w-8 h-8 text-slate-400"></i>
             </a>
         </section>
 
         <!-- Skills -->
-        <section id="skills">
+        <section id="skills" class="py-20 md:py-0">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
                 <div class="mb-8" data-aos="fade-up">
                     <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-center">Core Skills</h2>
@@ -177,7 +207,7 @@
         </section>
 
         <!-- Projects -->
-        <section id="projects">
+        <section id="projects" class="py-20 md:py-0">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
                 <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6" data-aos="fade-up">
                     <div>
@@ -215,7 +245,7 @@
         </section>
 
         <!-- Contact -->
-        <section id="contact">
+        <section id="contact" class="py-20 md:py-0">
             <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 w-full">
                 <div class="mb-6 text-center" data-aos="fade-up">
                     <h2 class="text-2xl md:text-3xl font-bold tracking-tight">Contact</h2>
@@ -265,17 +295,6 @@
             </div>
         </footer>
     </main>
-
-    <!-- Welcome Popup -->
-    <div id="welcome-popup" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-2xl shadow-xl p-8 text-center max-w-sm" data-aos="zoom-in">
-            <h2 class="text-2xl font-bold text-slate-900 mb-2">Congratulations!</h2>
-            <p class="text-slate-600 mb-6">You've found the portfolio of a passionate developer. Welcome!</p>
-            <button id="close-popup" class="rounded-xl px-5 py-2.5 bg-slate-900 text-white shadow hover:shadow-md transition">
-                Explore My Work
-            </button>
-        </div>
-    </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -368,17 +387,24 @@
 
             feather.replace();
 
-            // --- WELCOME POPUP LOGIC ---
-            const welcomePopup = document.getElementById('welcome-popup');
-            const closePopupBtn = document.getElementById('close-popup');
-            
-            if (!sessionStorage.getItem('visited')) {
-                welcomePopup.classList.remove('hidden');
-                sessionStorage.setItem('visited', 'true');
-            }
+            // --- PRELOADER LOGIC ---
+            const preloader = document.getElementById('preloader');
+            window.onload = () => {
+                preloader.classList.add('loaded');
+                setTimeout(() => {
+                    preloader.classList.add('fade-out');
+                    document.body.classList.remove('loading');
+                }, 1000);
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 1500); // Wait for fade out animation
+            };
 
-            closePopupBtn.addEventListener('click', () => {
-                welcomePopup.classList.add('hidden');
+            // --- MOBILE MENU ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
             });
 
             // --- FILTERING & SORTING LOGIC ---
@@ -561,4 +587,3 @@
     </script>
 </body>
 </html>
-
