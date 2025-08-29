@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusFetcher - Global Stats</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f2f5;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+        .stat-icon {
+            background-color: #e0e7ff;
+            color: #4f46e5;
+            padding: 1rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-primary {
+            background-color: #4f46e5;
+            color: white;
+            font-weight: bold;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #4338ca;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <!-- Header -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900">NexusFetcher Global Stats</h1>
+            <p class="text-lg text-gray-600 mt-2">Live insights into our automated data scraping network.</p>
+        </header>
+
+        <!-- Headline Statistics -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="card p-6">
+                <div class="flex items-center">
+                    <div class="stat-icon">
+                        <i class="fas fa-database text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-gray-500">Total Leads Processed</h3>
+                        <p id="total-leads" class="text-3xl font-bold">0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-6">
+                <div class="flex items-center">
+                    <div class="stat-icon bg-green-100 text-green-600">
+                        <i class="fas fa-check-circle text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-gray-500">Total Jobs Completed</h3>
+                        <p id="total-jobs" class="text-3xl font-bold">0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-6">
+                <div class="flex items-center">
+                    <div class="stat-icon bg-blue-100 text-blue-600">
+                        <i class="fas fa-bullseye text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-gray-500">Success Rate</h3>
+                        <p id="success-rate" class="text-3xl font-bold">0%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card p-6">
+                <div class="flex items-center">
+                    <div class="stat-icon bg-red-100 text-red-600">
+                        <i class="fas fa-robot text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-gray-500">Bots Currently Online</h3>
+                        <p id="bots-online" class="text-3xl font-bold">0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Activity Chart -->
+            <div class="card lg:col-span-2 p-6">
+                <h2 class="text-xl font-bold mb-4">Activity Over Last 7 Days</h2>
+                <canvas id="activityChart"></canvas>
+            </div>
+            <!-- Job Status Chart -->
+            <div class="card p-6 flex flex-col items-center justify-center">
+                <h2 class="text-xl font-bold mb-4">Job Status Breakdown</h2>
+                <div class="w-full max-w-xs">
+                    <canvas id="jobStatusChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity & Logs -->
+        <div class="card p-6">
+            <h2 class="text-xl font-bold mb-4">Live Activity Feed</h2>
+            <div class="bg-gray-900 text-white font-mono text-sm p-4 rounded-lg h-64 overflow-y-auto">
+                <ul id="activity-log">
+                    <!-- Log entries will be added here by JavaScript -->
+                </ul>
+            </div>
+            <div class="text-center mt-6">
+                <button id="download-logs-btn" class="btn-primary">
+                    <i class="fas fa-download mr-2"></i>Download Activity Report
+                </button>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="text-center text-gray-500 mt-12">
+            <p>&copy; 2025 NexusFetcher. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const totalLeadsEl = document.getElementById('total-leads');
+            const totalJobsEl = document.getElementById('total-jobs');
+            const successRateEl = document.getElementById('success-rate');
+            const botsOnlineEl = document.getElementById('bots-online');
+            const activityLogEl = document.getElementById('activity-log');
+            const downloadLogsBtn = document.getElementById('download-logs-btn');
+
+            // --- Load stats from localStorage or start with initial values ---
+            let stats = JSON.parse(localStorage.getItem('nexusFetcherStats')) || {
+                totalLeads: 1245678,
+                totalJobs: 10321,
+                botsOnline: 12,
+                completedJobs: 8200,
+                stalledJobs: 180,
+                totalScraped: 1229485,
+            };
+
+            const activityChartCtx = document.getElementById('activityChart').getContext('2d');
+            const activityChart = new Chart(activityChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Today'],
+                    datasets: [{
+                        label: 'Leads Processed',
+                        data: [18000, 22000, 19000, 25000, 23000, 28000, 15000],
+                        backgroundColor: 'rgba(79, 70, 229, 0.8)',
+                        borderColor: 'rgba(79, 70, 229, 1)',
+                        borderWidth: 1,
+                        borderRadius: 5,
+                    }]
+                },
+                options: { responsive: true, scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } }
+            });
+
+            const jobStatusChartCtx = document.getElementById('jobStatusChart').getContext('2d');
+            const jobStatusChart = new Chart(jobStatusChartCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Completed', 'Stalled'],
+                    datasets: [{
+                        label: 'Job Status',
+                        data: [stats.completedJobs, stats.stalledJobs],
+                        backgroundColor: ['#10B981', '#F59E0B'],
+                        hoverOffset: 4
+                    }]
+                },
+                options: { responsive: true, plugins: { legend: { position: 'top' } } }
+            });
+
+            const realisticLogMessages = [
+                'Bot "alpha-7" (user_alpha_7) came online in New York, US.',
+                'Bot "beta-3" (user_beta_3) started job #10322 (500 leads).',
+                'Bot "gamma-9" (user_gamma_9) completed job #10321. Success: 995/1000.',
+                'Bot "delta-1" (user_delta_1) went offline.',
+                'New leads (2500) assigned to bot "alpha-7" (user_alpha_7).',
+                'Bot "epsilon-2" (user_epsilon_2) came online in London, UK.',
+                'Bot "zeta-5" (user_zeta_5) stalled on job #10319. Last location: Singapore, SG.'
+            ];
+
+            function addLogEntry(message) {
+                const li = document.createElement('li');
+                const time = new Date().toLocaleTimeString('en-US', { hour12: false });
+                li.innerHTML = `<span class="text-green-400">[${time}]</span> <span class="text-gray-300">${message}</span>`;
+                activityLogEl.prepend(li);
+                if (activityLogEl.children.length > 50) {
+                    activityLogEl.lastChild.remove();
+                }
+            }
+            
+            // Initial log entries
+            for(let i=0; i<7; i++){
+                addLogEntry(realisticLogMessages[Math.floor(Math.random() * realisticLogMessages.length)]);
+            }
+
+            function updateStats() {
+                // --- Simulate Realistic Stat Increments ---
+                stats.totalLeads += Math.floor(Math.random() * 150) + 40;
+                stats.totalScraped += Math.floor(Math.random() * 145) + 38; // Slightly less than leads
+                
+                if (Math.random() > 0.98) { // Make job completion less frequent
+                    stats.totalJobs += 1;
+                    stats.completedJobs += 1;
+                }
+                 if (Math.random() > 0.995) { // Make stalled jobs rare
+                    stats.stalledJobs += 1;
+                }
+                
+                stats.botsOnline += (Math.random() > 0.5 ? 1 : -1);
+                if (stats.botsOnline < 8) stats.botsOnline = 8;
+                if (stats.botsOnline > 20) stats.botsOnline = 20;
+
+                const successRate = (stats.totalScraped / stats.totalLeads * 100).toFixed(1);
+
+                // --- Update UI Elements ---
+                totalLeadsEl.textContent = stats.totalLeads.toLocaleString();
+                totalJobsEl.textContent = stats.totalJobs.toLocaleString();
+                successRateEl.textContent = `${successRate}%`;
+                botsOnlineEl.textContent = stats.botsOnline;
+                
+                // --- Update Chart Data ---
+                const todayData = activityChart.data.datasets[0].data[6];
+                activityChart.data.datasets[0].data[6] = todayData + Math.floor(Math.random() * 150) + 40;
+                activityChart.update('none'); 
+
+                jobStatusChart.data.datasets[0].data = [stats.completedJobs, stats.stalledJobs];
+                jobStatusChart.update('none');
+
+                // --- Add a new log entry periodically ---
+                if (Math.random() > 0.6) {
+                    addLogEntry(realisticLogMessages[Math.floor(Math.random() * realisticLogMessages.length)]);
+                }
+
+                // --- Save to localStorage ---
+                localStorage.setItem('nexusFetcherStats', JSON.stringify(stats));
+            }
+
+            downloadLogsBtn.addEventListener('click', () => {
+                let logContent = `NexusFetcher - Activity Report\nGenerated at: ${new Date().toLocaleString()}\n\n`;
+                const logItems = activityLogEl.getElementsByTagName('li');
+                for (let i = logItems.length - 1; i >= 0; i--) {
+                    logContent += logItems[i].textContent + '\n';
+                }
+                const blob = new Blob([logContent], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `NexusFetcher_Report_${new Date().toISOString().split('T')[0]}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+            
+            // Start the live simulation with a faster interval
+            setInterval(updateStats, 800); // Update every 800 milliseconds
+        });
+    </script>
+</body>
+</html>
+
